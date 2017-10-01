@@ -1,0 +1,73 @@
+<?php
+/*
+	echo "<pre>";
+	print_r($pages);
+	echo "</pre>";
+	*/
+	
+	$title = "Мои страницы";
+	$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title)?></h1>
+<?php 
+	$container = new \Zend\Session\Container('logged');
+
+	//echo "роль пользователя ", $_SESSION["roleUser"];
+	echo "роль пользователя ", $container->offsetGet('roleUser');
+	if($pages) { 
+?>
+
+<?php if($acl->isAllowed($container->offsetGet('roleUser'), "page", "add")) { ?>
+
+<a href="<?php echo $this->url("page", array(
+								"action" => "add"
+								))?>">Добавить страницу</a>
+
+<?php } ?>
+								
+<table class="table">
+	<tr>
+		<th>Название</th>
+		<th>Содержание</th>
+		<th>&nbsp;</th>
+	</tr>
+	
+<?php if (count($this->paginator)): ?>
+	<?php
+		foreach($this->paginator as $page){ 
+	?>
+		<tr>
+			<td><?php echo $this->escapeHtml($page->title)." ", $this->escapeHtml($page->pub)?></td>
+			<td><?php echo $this->escapeHtml($page->article)?></td>
+			<td>
+				<a href="<?php echo $this->url("page", array(
+									"action" => "modify",
+									"id" 	 => $page->idpage
+									))?>">Редактировать</a>
+				<a href="<?php echo $this->url("page", array(
+									"action" => "delete",
+									"id" 	 => $page->idpage
+									))?>">Удалить</a>
+				
+			</td>
+		</tr>	
+			
+	<?php	}
+	?>
+<?php endif; ?>
+</table> 
+<?php echo $this->paginationControl($this->paginator,
+'Sliding',
+'my_pagination_control'); ?>
+
+<?php } else { 
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	//echo $this->form()->formCollection();
+	echo $this->formRow($form->get("login")), "<br/>";
+	echo $this->formRow($form->get("password")), "<br/>";
+	echo $this->formSubmit($form->get("submit"));
+	echo $this->form()->closeTag();
+}
+?>

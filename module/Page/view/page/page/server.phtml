@@ -1,0 +1,5 @@
+<?php echo $res;
+	$server = new \Zend\XmlRpc\Server;
+	$server->setClass('Page\Model\MyServer', 'myserver');
+	$server->handle();
+?>

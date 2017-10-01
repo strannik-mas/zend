@@ -1,0 +1,12 @@
+<?php
+	$title = "Удалить ли страницу???";
+	$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title) ?></h1>
+
+<p>Вы точно хотите удалить "<?=$page->title?>"</p>
+<form method="POST">
+	<input type="hidden" name="idpage"/ value="<?=$id?>">
+	<input type="submit" value="Yes" name="del"/>
+	<input type="submit" value="No" name="del"/>
+</form>

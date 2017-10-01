@@ -1,0 +1,32 @@
+<?php
+	$title = "Форма через аннотацию...";
+	$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title) ?></h1>
+
+<?php 
+
+if($messages){
+	foreach($messages as $message){
+?>
+<blockquote>
+	<?=$message?>
+</blockquote>
+<?php
+	}
+}
+
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formHidden($form->get("idpage"));
+	echo $this->formRow($form->get("title")), "<br/>";
+	echo $this->formRow($form->get("article")), "<br/>";
+	echo $this->formRow($form->get("pub")), "<br/>";
+	/* echo $this->formRow($form->get("php")), "<br/>";
+	echo $this->formRow($form->get("js")), "<br/>";
+	echo $this->formRow($form->get("pol")), "<br/>";
+	echo $this->formRow($form->get("language")), "<br/>";
+	echo $this->formRow($form->get("color")), "<br/>"; */
+	//echo $this->formSubmit($form->get("submit"));
+	echo $this->form()->closeTag();
+?>

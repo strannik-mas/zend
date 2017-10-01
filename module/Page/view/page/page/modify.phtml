@@ -1,0 +1,30 @@
+<?php
+	$title = "Редактирование страницы";
+	$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title) ?></h1>
+
+
+<?php 
+//из-за того, что передаётся массив
+	//$form = $this->form; 
+//echo $id;
+	$form->setAttribute("action", $this->url("page", 
+	array(
+		"action" => "modify",
+		'id' => $this->id,
+	))); // можно и без этой строки
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formHidden($form->get("idpage"));
+	echo $this->formRow($form->get("title")), "<br/>";
+	echo $this->formRow($form->get("article")), "<br/>";
+	echo $this->formRow($form->get("pub")), "<br/>";
+	echo $this->formSubmit($form->get("submit"));
+	echo $this->form()->closeTag();
+/*
+	echo "<pre>";
+	print_r($form);
+	echo "</pre>";
+	*/
+?>

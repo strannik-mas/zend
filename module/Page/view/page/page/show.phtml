@@ -1,0 +1,28 @@
+<?php
+	$title = "Анонс страницы";
+	$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title) ?></h1>
+<h1><?=$this->escapeHtml($page->title) ?></h1>
+<p><?=$this->escapeHtml($page->article) ?></p>
+Скопировать код:<br>
+<textarea cols="30" rows="5">
+<?=$this->escapeHtml($page->title) ?>
+<p><?=$this->escapeHtml(substr($page->article, 0, 100)) ?></p>
+<a href="http://zend<?php echo $this->url("page", array(
+								"action" => "show",
+								"id" => $page->idpage
+								))?>">Читать далее</a></textarea>
+		
+							
+								
+								
+<?php
+	/* $arr = array(3, "fdf", true);
+	$json = \Zend\Json\Json::encode($arr);
+	$json = \Zend\Json\Json::encode($page);
+	var_dump($json);
+	echo "<pre>", Zend\Json\Json::prettyPrint($json, array("indent" => " - "));
+	$page2 = \Zend\Json\Json::decode($json);
+	var_dump($page2); */
+?>
